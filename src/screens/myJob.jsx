@@ -15,7 +15,6 @@ const MyJob = () => {
   const navigation = useNavigation();
   const {school, rejected} = useSelector(state => state.user);
   const dispatch = useDispatch();
-  console.log(RNHTMLtoPDF)
 
   const reject = () => {
     dispatch(rejectPosting());
@@ -83,8 +82,6 @@ const MyJob = () => {
       fileName: 'test',
       base64: true,
     });
-
-    console.log(results);
 
     await RNPrint.print({filePath: results.filePath});
   }

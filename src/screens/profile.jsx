@@ -10,8 +10,6 @@ import {useSelector} from 'react-redux';
 const Profile = () => {
   const navigation = useNavigation();
   const {user} = useSelector(state => state.user);
-
-  console.log(user)
   return (
     <View style={styles.container}>
       <Ionicons
