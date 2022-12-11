@@ -16,9 +16,9 @@ const Home = () => {
     <View style={styles.container}>
       <Text
         style={[textStyle.defaultBoldTitle3, {marginTop: 10}]}
-        onPress={() => {
-          dispatch(logoutUser()), navigation.replace('Login');
-        }}
+        // onPress={() => {
+        //   dispatch(logoutUser()), navigation.replace('Login');
+        // }}
         >
         Welcome {user?.firstName},
       </Text>
