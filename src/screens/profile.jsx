@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import colors from '../utils/colors';
 import {heightRes, widthRes} from '../utils/responsive';
@@ -17,7 +17,16 @@ const Profile = () => {
         size={widthRes(6)}
         onPress={() => navigation.goBack()}
       />
-      <Text style={styles.topText}>PS</Text>
+      <Image
+        source={require('../applogo.png')}
+        style={{
+          width: widthRes(40),
+          height: widthRes(20),
+          resizeMode: 'contain',
+          alignSelf:'center',
+          marginBottom: 10
+        }}
+      />
       <View style={styles.contentContainer}>
         <View>
           <View style={styles.content}>

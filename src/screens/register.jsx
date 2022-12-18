@@ -1,26 +1,38 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import colors from '../utils/colors';
 import Input from '../components/Input';
-import {heightRes} from '../utils/responsive';
+import {heightRes, widthRes} from '../utils/responsive';
 import Button from '../components/Button';
 import textStyle from '../utils/textStyle';
 import {useNavigation} from '@react-navigation/native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {useDispatch} from 'react-redux';
 import {saveUser} from '../redux/slice/user/userSlice';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import DocumentPicker from 'react-native-document-picker';
 const Register = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const emailRegex = RegExp(
     /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
   );
+  const tescomRegex = RegExp(/^([0-9]{4})[A-Z]{2}$/);
+
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [genderError, setGenderError] = useState('');
   const [openTown, setOpenTown] = useState(false);
   const [valueTown, setValueTown] = useState(null);
   const [townError, setTownError] = useState('');
+  const [uploaded, setUploaded] = useState(false);
 
   const [items, setItems] = useState([
     {label: 'Male', value: 'Male'},
@@ -120,6 +132,7 @@ const Register = () => {
     email: '',
     phoneNumber: '',
     password: '',
+    tescom: '',
   });
 
   const [error, setError] = useState({
@@ -128,6 +141,7 @@ const Register = () => {
     email: '',
     phoneNumber: '',
     password: '',
+    tescom: '',
   });
 
   const onChange = useCallback(
@@ -158,6 +172,9 @@ const Register = () => {
     if (details.phoneNumber.length < 11) {
       return errorHandler('phoneNumber', 'Enter a valid Phone Number');
     }
+    if (!tescomRegex.test(details.tescom)) {
+      return errorHandler('tescom', 'Enter a valid Tescom Number');
+    }
     if (value === null) {
       return setGenderError('Select your Gender');
     }
@@ -181,7 +198,14 @@ const Register = () => {
     };
 
     dispatch(saveUser(data));
-    navigation.replace("Login")
+    navigation.replace('Login');
+  };
+
+  const openDocument = async () => {
+    setUploaded(true)
+    DocumentPicker.pickSingle({
+      type: [DocumentPicker.types.pdf],
+    }).then(res => console.log(res));
   };
 
   return (
@@ -189,13 +213,14 @@ const Register = () => {
       style={styles.container}
       contentContainerStyle={{alignItems: 'center'}}
       showsVerticalScrollIndicator={false}>
-      <Text
-        style={[
-          textStyle.defaultBoldLargeTitle,
-          {marginVertical: heightRes(4)},
-        ]}>
-        PS
-      </Text>
+      <Image
+        source={require('../applogo.png')}
+        style={{
+          width: widthRes(40),
+          height: widthRes(20),
+          resizeMode: 'contain',
+        }}
+      />
       <View style={{width: '100%'}}>
         <Text style={styles.text}>First Name</Text>
         <Input
@@ -215,6 +240,14 @@ const Register = () => {
           error={error.phoneNumber}
           onChange={text => onChange('phoneNumber', text)}
           maxlength={11}
+        />
+        <Text style={styles.text}>Tescom Number</Text>
+        <Input
+          keyboardType="numeric"
+          error={error.tescom}
+          onChange={text => onChange('tescom', text)}
+          maxlength={6}
+          placeholder={'4444AA'}
         />
 
         <Text style={styles.text}>Gender</Text>
@@ -253,7 +286,7 @@ const Register = () => {
           searchable
           dropDownDirection="TOP"
           flatListProps={{
-            nestedScrollEnabled: true
+            nestedScrollEnabled: true,
           }}
         />
 
@@ -264,6 +297,23 @@ const Register = () => {
           onChange={text => onChange('password', text)}
           secure
         />
+        <Text style={styles.text}>Upload your certificate</Text>
+        <TouchableOpacity
+          style={{
+            borderWidth: 1,
+            padding: heightRes(3),
+            alignSelf: 'flex-start',
+            borderRadius: 20,
+            borderColor: colors.gray,
+          }}
+          onPress={openDocument}>
+          <Ionicons name="md-duplicate" size={widthRes(8)} />
+        </TouchableOpacity>
+        {uploaded && (
+          <Text style={[styles.text, {color: 'green'}]}>
+            Certificate uploaded
+          </Text>
+        )}
         <Text
           style={{
             textAlign: 'right',

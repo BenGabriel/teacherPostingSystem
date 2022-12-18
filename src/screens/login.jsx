@@ -1,8 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import colors from '../utils/colors';
 import Input from '../components/Input';
-import {heightRes} from '../utils/responsive';
+import {heightRes, widthRes} from '../utils/responsive';
 import Button from '../components/Button';
 import textStyle from '../utils/textStyle';
 import {useNavigation} from '@react-navigation/native';
@@ -12,6 +12,7 @@ import {loginUser} from '../redux/slice/user/userSlice';
 const Login = () => {
   const navigation = useNavigation();
   const {user, loggedIn} = useSelector(state => state.user);
+  
   const dispatch = useDispatch();
 
   const [details, setDetails] = useState({
@@ -60,13 +61,11 @@ const Login = () => {
     <View style={styles.container}>
       {loggedIn ? null : (
         <>
-          <Text
-            style={[
-              textStyle.defaultBoldLargeTitle,
-              {marginVertical: heightRes(4)},
-            ]}>
-            PS
-          </Text>
+          <Image source={require("../applogo.png")} style={{
+            width: widthRes(40),
+            height: widthRes(20),
+            resizeMode:'contain',
+          }}/>
           <View style={{width: '100%'}}>
             <Text style={styles.text}>Email</Text>
             <Input

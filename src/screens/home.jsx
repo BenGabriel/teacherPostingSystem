@@ -4,6 +4,7 @@ import colors from '../utils/colors';
 import textStyle from '../utils/textStyle';
 import {heightRes, widthRes} from '../utils/responsive';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {logoutUser} from '../redux/slice/user/userSlice';
@@ -15,11 +16,10 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <Text
-        style={[textStyle.defaultBoldTitle3, {marginTop: 10}]}
-        // onPress={() => {
-        //   dispatch(logoutUser()), navigation.replace('Login');
-        // }}
-        >
+        style={[textStyle.defaultBoldTitle3, {marginTop: heightRes(3)}]}
+        onPress={() => {
+          dispatch(logoutUser()), navigation.replace('Login');
+        }}>
         Welcome {user?.firstName},
       </Text>
       <View style={styles.top}>
@@ -53,6 +53,10 @@ const Home = () => {
             <Text style={styles.contentText}>My Job</Text>
           </TouchableOpacity>
         )}
+        <TouchableOpacity style={styles.content} activeOpacity={0.6}>
+          <MaterialIcons name="support-agent" size={widthRes(10)} />
+          <Text style={styles.contentText}>Support</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -64,12 +68,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    padding: heightRes(2),
+    padding: heightRes(2.5),
   },
   top: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: heightRes(2),
+    marginVertical: heightRes(4),
   },
   content: {
     width: '46%',

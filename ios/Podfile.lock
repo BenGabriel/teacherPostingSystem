@@ -302,6 +302,8 @@ PODS:
   - React-jsinspector (0.70.6)
   - React-logger (0.70.6):
     - glog
+  - react-native-document-picker (8.1.3):
+    - React-Core
   - react-native-html-to-pdf (0.12.0):
     - React-Core
   - react-native-print (0.10.0):
@@ -439,6 +441,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-html-to-pdf (from `../node_modules/react-native-html-to-pdf`)
   - react-native-print (from `../node_modules/react-native-print`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -521,6 +524,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-document-picker:
+    :path: "../node_modules/react-native-document-picker"
   react-native-html-to-pdf:
     :path: "../node_modules/react-native-html-to-pdf"
   react-native-print:
@@ -597,6 +602,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: b4a65947391c658450151275aa406f2b8263178f
   React-jsinspector: 60769e5a0a6d4b32294a2456077f59d0266f9a8b
   React-logger: 1623c216abaa88974afce404dc8f479406bbc3a0
+  react-native-document-picker: 958e2bc82e128be69055be261aeac8d872c8d34c
   react-native-html-to-pdf: 4c5c6e26819fe202971061594058877aa9b25265
   react-native-print: 1ae7a4ce4bf673b975f2ec9c4e00ad0c9b60e8aa
   react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
